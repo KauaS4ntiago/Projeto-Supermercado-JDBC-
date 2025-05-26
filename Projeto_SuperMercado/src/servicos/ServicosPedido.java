@@ -24,6 +24,10 @@ public class ServicosPedido {
 	public void removerPedido(int id) {
 		repositorio.remover(id);
 	}
+	
+	public void removerPedidosDoCliente(String cpf) {
+		repositorio.remover(cpf);
+	}
 
 	// Métodos de retorno
 
@@ -50,16 +54,11 @@ public class ServicosPedido {
 	public void adicionarProduto(ItemPedido produto, int id) {
 		repositorio.buscar(id).adicionarProduto(produto);
 		System.out.println("Produto adicionado com sucesso!");
+		System.out.println();
 	}
 
 	public void removerProduto(ItemPedido produto, int id) {
 		repositorio.buscar(id).removerProduto(produto);
-	}
-
-	// Método que gera uma nota fiscal com todas informações do pedido
-
-	public String gerarNotaFiscal(int id) {
-		return repositorio.buscar(id).toString();
 	}
 
 	// Retorna a quantidade de itens

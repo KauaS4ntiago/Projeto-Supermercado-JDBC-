@@ -22,14 +22,17 @@ public class ServicosFuncionarios {
 			if (repositorio.buscar(funcionario.getCpf()) == null) {
 				// Cadastro sendo efetuado
 				repositorio.salvar(funcionario);
+				System.out.println("Bem-Vindo!" + repositorio.buscar(funcionario.getCpf()).getNome() + "!");
 				return true;
 			} else {
 				System.out.println("Funcionario já cadastrado!");
+				System.out.println();
 				// Login sendo efetuado
 				return login(funcionario.getCpf(), funcionario.getSenha());
 			}
 		}
 		System.out.println("Funcionario inválido!");
+		System.out.println();
 		return false;
 	}
 
@@ -37,14 +40,22 @@ public class ServicosFuncionarios {
 
 	public boolean login(String cpf, String senha) {
 		for (int i = 0; i < repositorio.size(); i++) {
+			repositorio.atualizar(cpf, "ativo", true);
 			Funcionario funcionario = repositorio.listarTodos().get(i);
 			if (funcionario.getCpf().equals(cpf) && funcionario.getSenha().equals(senha)) {
 				System.out.println("Login efetuado com sucesso!");
+				System.out.println("Bem-Vindo!" + repositorio.buscar(cpf).getNome() + "!");
+				System.out.println();
 				return true;
 			}
 		}
-		System.out.println("Email ou senha inválidos.");
+		System.out.println("Cpf ou senha inválidos.");
+		System.out.println();
 		return false;
+	}
+
+	public void removerFuncionario(String cpf) {
+		repositorio.remover(cpf);
 	}
 
 	// Método de alteração de algum dado
@@ -90,8 +101,10 @@ public class ServicosFuncionarios {
 			repositorio.atualizar(cpf, "carga_semanal", novaFuncao.getCargaSemanal());
 
 			System.out.println("Promoção aplicada com sucesso.");
+			System.out.println();
 		} else {
 			System.out.println("Funcionário não encontrado.");
+			System.out.println();
 		}
 	}
 

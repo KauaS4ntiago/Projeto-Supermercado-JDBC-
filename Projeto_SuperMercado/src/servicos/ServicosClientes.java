@@ -21,6 +21,7 @@ public class ServicosClientes {
 			if (repositorio.buscar(cliente.getCpf()) == null) {
 				// Cadastro sendo efetuado
 				repositorio.salvar(cliente);
+				System.out.println("Bem-Vindo!" + repositorio.buscar(cliente.getCpf()).getNome()+"!");
 				return true;
 			} else {
 				System.out.println("Cliente já cadastrado!");
@@ -30,6 +31,7 @@ public class ServicosClientes {
 			}
 		}
 		System.out.println("Cliente inválido!");
+		System.out.println();
 		return false;
 	}
 
@@ -37,13 +39,17 @@ public class ServicosClientes {
 
 	public boolean login(String cpf, String senha) {
 		for (int i = 0; i < repositorio.size(); i++) {
+			repositorio.atualizar(cpf,"ativo",true);
 			Cliente cliente = repositorio.listarTodos().get(i);
 			if (cliente.getCpf().equals(cpf) && cliente.getSenha().equals(senha)) {
 				System.out.println("Login efetuado com sucesso!");
+				System.out.println("Bem-Vindo!" + repositorio.buscar(cpf).getNome()+"!");
+				System.out.println();
 				return true;
 			}
 		}
-		System.out.println("Email ou senha inválidos.");
+		System.out.println("Cpf ou senha inválidos.");
+		System.out.println();
 		return false;
 	}
 
@@ -51,7 +57,7 @@ public class ServicosClientes {
 
 	public void removerCliente(String cpf) {
 		repositorio.remover(cpf);
-		System.out.println("Cliente apagado com sucesso!");
+
 	}
 
 	// Método de alteração de algum dado
@@ -76,9 +82,11 @@ public class ServicosClientes {
 	public void tornarMembro(String cpf) {
 		if (!(repositorio.buscar(cpf) == null)) {
 			System.out.println("Parabéns! Cliente virou membro com sucesso!");
+			System.out.println();
 			repositorio.atualizar(cpf, "membro", true);
 		} else {
 			System.out.println("Cliente não existe!");
+			System.out.println();
 		}
 
 	}
@@ -86,9 +94,11 @@ public class ServicosClientes {
 	public void retirarMembro(String cpf) {
 		if (!(repositorio.buscar(cpf) == null)) {
 			System.out.println("Cliente cancelou sua assinatura com sucesso!");
+			System.out.println();
 			repositorio.atualizar(cpf, "membro", false);
 		} else {
 			System.out.println("Cliente não existe!");
+			System.out.println();
 		}
 	}
 

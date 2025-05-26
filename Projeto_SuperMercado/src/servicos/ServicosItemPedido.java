@@ -21,6 +21,7 @@ public class ServicosItemPedido {
 	public void adicionarItem(ItemPedido item) {
 		if (item == null || item.getQuantidade() <= 0) {
 			System.out.println("Item inválido ou quantidade menor ou igual a zero.");
+			System.out.println();
 			return;
 		}
 		repositorio.salvar(item);

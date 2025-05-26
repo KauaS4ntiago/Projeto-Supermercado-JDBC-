@@ -64,4 +64,9 @@ public class Produto {
 	public void setQuantidadeEstoque(int quantidadeEstoque) {
 		this.quantidadeEstoque = quantidadeEstoque;
 	}
+	
+	@Override
+	public String toString() {
+		return "ID:" + id + "-" + nome + "(" + marca + ")" + "R$"+ preco + " Quantidade em estoque: " + quantidadeEstoque;
+				}
 }

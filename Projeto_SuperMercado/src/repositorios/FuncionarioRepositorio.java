@@ -31,7 +31,8 @@ public class FuncionarioRepositorio implements ICrudGenerico<Funcionario, String
 			stmt.setString(9, funcionario.getEndereco());
 			stmt.setBoolean(10, funcionario.getAtivo());
 			stmt.executeUpdate();
-			System.out.println("Funcionário adicionado com sucesso!");
+			System.out.println("Funcionário cadastrado com sucesso!");
+			System.out.println();
 		} catch (SQLException e) {
 			System.err.println("ERRO:" + e.getMessage());
 		}
@@ -41,7 +42,7 @@ public class FuncionarioRepositorio implements ICrudGenerico<Funcionario, String
 	@Override
 	public ListaEncadeada<Funcionario> listarTodos() {
 		ListaEncadeada<Funcionario> funcionarios = new ListaEncadeada<>();
-		String sql = "SELECT * FROM Funcionario";
+		String sql = "SELECT * FROM Funcionario WHERE ativo = true";
 		try (Connection conn = ConexaoMySql.conectar();
 				Statement stmt = conn.createStatement();
 				ResultSet rs = stmt.executeQuery(sql)) {
@@ -109,11 +110,13 @@ public class FuncionarioRepositorio implements ICrudGenerico<Funcionario, String
 				stmt.setInt(1, (Integer) novoValor);
 			} else {
 				System.out.println("Tipo de dado não suportado.");
+				System.out.println();
 				return;
 			}
 			stmt.setString(2, cpf);
 			stmt.executeUpdate();
 			System.out.println("Atualização feita com sucesso!");
+			System.out.println();
 		} catch (SQLException e) {
 			System.err.println("ERRO:" + e.getErrorCode());
 		}
@@ -126,13 +129,15 @@ public class FuncionarioRepositorio implements ICrudGenerico<Funcionario, String
 		try (Connection conn = ConexaoMySql.conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setString(1, cpf);
 			stmt.executeUpdate();
+			System.out.println("Funcionário apagado com sucesso!");
+			System.out.println();
 		} catch (SQLException e) {
 			System.err.println("ERRO::" + e.getErrorCode());
 		}
 	}
 
 	public int size() {
-		String sql = "SELECT COUNT(*) AS total FROM Funcionario";
+		String sql = "SELECT COUNT(*) AS total FROM Funcionario WHERE ativo = true";
 		try (Connection conn = ConexaoMySql.conectar();
 				Statement stmt = conn.createStatement();
 				ResultSet rs = stmt.executeQuery(sql)) {

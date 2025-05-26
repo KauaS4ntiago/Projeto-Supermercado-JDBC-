@@ -29,6 +29,7 @@ public class Pedido {
 		this.data = data;
 		this.formaPagamento = formaPagamento;
 		this.total = getTotal();
+		this.id++;
 	}
 
 	// Gets e sets
@@ -93,7 +94,7 @@ public class Pedido {
 	@Override
 	public String toString() {
 		return "------PEDIDO_" + id + "------\n" + "Cpf do cliente: " + cpf_cliente + "\n" + "Forma de pagamento: "
-				+ formaPagamento + "\n" + "Data da compra: " + data + "\n" + "Produtos: " + carrinho + "\n\n"
+				+ formaPagamento + "\n" + "Data da compra: " + data + "\n" + "Produtos: " + carrinho + "\n"
 				+ "Total: " + getTotal() * (1 - formaPagamento.getDesconto());
 	}
 }

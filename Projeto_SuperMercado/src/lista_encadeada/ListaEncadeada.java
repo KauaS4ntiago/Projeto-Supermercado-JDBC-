@@ -14,6 +14,14 @@ public class ListaEncadeada<T> {
 			this.proximo = null;
 		}
 
+		public T getDado() {
+			return dado;
+		}
+
+		public No<T> getProximo() {
+			return proximo;
+		}
+
 	}
 
 	// Atributos auxiliares da Lista
@@ -159,4 +167,14 @@ public class ListaEncadeada<T> {
 		tamanho = 0;
 	}
 
+	@Override
+	public String toString() {
+		String resultado = "";
+		No<T> atual = cabeca;
+		while (atual != null) {
+			resultado += atual.getDado().toString() + "\n";
+			atual = atual.getProximo();
+		}
+		return resultado;
+	}
 }

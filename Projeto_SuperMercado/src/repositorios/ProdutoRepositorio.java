@@ -24,6 +24,7 @@ public class ProdutoRepositorio implements ICrudGenerico<Produto, Integer> {
 			stmt.setInt(4, produto.getQuantidadeEstoque());
 			stmt.executeUpdate();
 			System.out.println("Produto adicionado com sucesso!");
+			System.out.println();
 		} catch (SQLException e) {
 			System.err.println("Erro:" + e.getMessage());
 		}
@@ -86,11 +87,13 @@ public class ProdutoRepositorio implements ICrudGenerico<Produto, Integer> {
 				stmt.setDouble(1, (double) novoValor);
 			} else {
 				System.out.println("Tipo de dado não suportado.");
+				System.out.println();
 				return;
 			}
 			stmt.setInt(2, id);
 			stmt.executeUpdate();
 			System.out.println("Atualização feita com sucesso!");
+			System.out.println();
 		} catch (SQLException e) {
 			System.err.println("Erro:" + e.getErrorCode());
 		}
@@ -104,6 +107,7 @@ public class ProdutoRepositorio implements ICrudGenerico<Produto, Integer> {
 			stmt.setInt(1, id);
 			stmt.executeUpdate();
 			System.out.println("Produto removido com sucesso!");
+			System.out.println();
 		} catch (SQLException e) {
 			System.err.println("Erro:" + e.getErrorCode());
 		}

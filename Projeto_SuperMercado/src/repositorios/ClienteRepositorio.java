@@ -28,7 +28,8 @@ public class ClienteRepositorio implements ICrudGenerico<Cliente, String> {
 			stmt.setString(7, cliente.getEndereco());
 			stmt.setBoolean(8, cliente.getAtivo());
 			stmt.executeUpdate();
-			System.out.println("Cliente adicionado com sucesso!");
+			System.out.println("Cliente cadastrado com sucesso!");
+			System.out.println();
 		} catch (SQLException e) {
 			System.err.println("ERRO:" + e.getMessage());
 		}
@@ -38,7 +39,7 @@ public class ClienteRepositorio implements ICrudGenerico<Cliente, String> {
 	@Override
 	public ListaEncadeada<Cliente> listarTodos() {
 		ListaEncadeada<Cliente> clientes = new ListaEncadeada<>();
-		String sql = "SELECT * FROM Cliente";
+		String sql = "SELECT * FROM Cliente WHERE ativo = true";
 		try (Connection conn = ConexaoMySql.conectar();
 				Statement stmt = conn.createStatement();
 				ResultSet rs = stmt.executeQuery(sql)) {
@@ -99,11 +100,13 @@ public class ClienteRepositorio implements ICrudGenerico<Cliente, String> {
 				stmt.setBoolean(1, (boolean) novoValor);
 			} else {
 				System.out.println("Tipo de dado não suportado.");
+				System.out.println();
 				return;
 			}
 			stmt.setString(2, cpf);
 			stmt.executeUpdate();
 			System.out.println("Atualização feita com sucesso!");
+			System.out.println();
 		} catch (SQLException e) {
 			System.err.println("ERRO:" + e.getErrorCode());
 		}
@@ -116,13 +119,15 @@ public class ClienteRepositorio implements ICrudGenerico<Cliente, String> {
 		try (Connection conn = ConexaoMySql.conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setString(1, cpf);
 			stmt.executeUpdate();
+			System.out.println("Cliente apagado com sucesso!");
+			System.out.println();
 		} catch (SQLException e) {
 			System.err.println("ERRO::" + e.getErrorCode());
 		}
 	}
 
 	public int size() {
-		String sql = "SELECT COUNT(*) AS total FROM Cliente";
+		String sql = "SELECT COUNT(*) AS total FROM Cliente WHERE ativo = true";
 		try (Connection conn = ConexaoMySql.conectar();
 				Statement stmt = conn.createStatement();
 				ResultSet rs = stmt.executeQuery(sql)) {

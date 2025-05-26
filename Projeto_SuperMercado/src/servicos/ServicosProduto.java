@@ -44,12 +44,12 @@ public class ServicosProduto {
 
 	public void aumentarPreco(int id, double aumento) {
 		Double novoPreco = repositorio.buscar(id).getPreco() + aumento;
-		repositorio.buscar(id).setPreco(novoPreco);
+		repositorio.atualizar(id, "preco", novoPreco);
 	}
 
 	public void diminuirPreco(int id, double reducao) {
 		Double novoPreco = repositorio.buscar(id).getPreco() - reducao;
-		repositorio.buscar(id).setPreco(novoPreco);
+		repositorio.atualizar(id, "preco", novoPreco);
 	}
 
 	// Métodos de aumento e redução de quantidade de produtos em estoque
@@ -57,6 +57,7 @@ public class ServicosProduto {
 	public void reduzirEstoque(int id, int qnt) {
 		if (qnt > repositorio.buscar(id).getQuantidadeEstoque()) {
 			System.out.println("Quantidade fora de estoque!");
+			System.out.println();
 		} else {
 			repositorio.atualizar(id, "qnt_estoque", repositorio.buscar(id).getQuantidadeEstoque() - qnt);
 		}

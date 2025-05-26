@@ -22,10 +22,11 @@ public class PedidoRepositorio implements ICrudGenerico<Pedido, Integer> {
 		try (Connection conn = ConexaoMySql.conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setString(1, pedido.getCpf_cliente());
 			stmt.setString(2, pedido.getFormaPagamento().name());
-			stmt.setDate(3, Date.valueOf(pedido.getData()) );
+			stmt.setDate(3, Date.valueOf(pedido.getData()));
 			stmt.setDouble(4, pedido.getTotal());
 			stmt.executeUpdate();
 			System.out.println("Pedido adicionado com sucesso!");
+			System.out.println();
 		} catch (SQLException e) {
 			System.err.println("ERRO:" + e.getMessage());
 		}
@@ -41,14 +42,16 @@ public class PedidoRepositorio implements ICrudGenerico<Pedido, Integer> {
 				ResultSet rs = stmt.executeQuery(sql)) {
 			while (rs.next()) {
 				Pedido p = new Pedido();
+				p.setId(rs.getInt("id"));
 				p.setCpf_cliente(rs.getString("cpf_cliente"));
 				p.setFormaPagamento(FormaDePagamento.valueOf(rs.getString("forma_pagamento")));
-				p.setData(rs.getDate("data").toLocalDate());
+				p.setData(rs.getDate("data_pedido").toLocalDate());
 				p.setTotal(rs.getDouble("total"));
 				pedidos.add(p);
 			}
 		} catch (SQLException e) {
-			System.err.println("ERRO:" + e.getErrorCode());
+			 System.err.println("ERRO SQL [" + e.getErrorCode() + "]: " + e.getMessage());
+			    e.printStackTrace();
 		}
 		return pedidos;
 	}
@@ -89,11 +92,13 @@ public class PedidoRepositorio implements ICrudGenerico<Pedido, Integer> {
 				stmt.setDouble(1, (double) novoValor);
 			} else {
 				System.out.println("Tipo de dado não suportado.");
+				System.out.println();
 				return;
 			}
 			stmt.setInt(2, id);
 			stmt.executeUpdate();
 			System.out.println("Atualização feita com sucesso!");
+			System.out.println();
 		} catch (SQLException e) {
 			System.err.println("ERRO:" + e.getErrorCode());
 		}
@@ -106,6 +111,20 @@ public class PedidoRepositorio implements ICrudGenerico<Pedido, Integer> {
 		try (Connection conn = ConexaoMySql.conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 			stmt.setInt(1, id);
 			stmt.executeUpdate();
+			System.out.println("Pedido removido com sucesso!");
+			System.out.println();
+		} catch (SQLException e) {
+			System.err.println("ERRO::" + e.getErrorCode());
+		}
+	}
+
+	public void remover(String cpf) {
+		String sql = "DELETE FROM Pedido WHERE cpf_cliente = ?";
+		try (Connection conn = ConexaoMySql.conectar(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+			stmt.setString(1, cpf);
+			stmt.executeUpdate();
+			System.out.println("Pedidos relacionados ao cliente removido com sucesso!");
+			System.out.println();
 		} catch (SQLException e) {
 			System.err.println("ERRO::" + e.getErrorCode());
 		}

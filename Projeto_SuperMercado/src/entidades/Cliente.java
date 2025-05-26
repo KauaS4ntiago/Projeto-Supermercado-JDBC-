@@ -30,4 +30,10 @@ public class Cliente extends Pessoa {
 		this.membro = membro;
 	}
 
+	@Override
+	public String toString() {
+		return "Cliente {" + "nome='" + getNome() + '\'' + ", email='" + getEmail() + '\'' + ", dataNascimento="
+				+ getDataNascimento() + ", cpf='" + getCpf() + '\'' + ", membro=" + membro + ", senha='" + getSenha()
+				+ '\'' + ", endereco='" + getEndereco() + '\'' + ", ativo=" + getAtivo() + '}';
+	}
 }
