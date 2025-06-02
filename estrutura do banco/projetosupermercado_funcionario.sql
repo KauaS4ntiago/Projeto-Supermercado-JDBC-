@@ -44,7 +44,7 @@ CREATE TABLE `funcionario` (
 
 LOCK TABLES `funcionario` WRITE;
 /*!40000 ALTER TABLE `funcionario` DISABLE KEYS */;
-INSERT INTO `funcionario` VALUES ('GERENTE',4700.50,'ADM1','ADM@gmail.com','2025-05-03','12345678910',25,'1234','Nova York',1),('ESTOQUISTA',1900.00,'Eric ','ericpessoa@gmail.com','2007-03-03','57383564982',52,'hahayy','Salgadinho',1);
+INSERT INTO `funcionario` VALUES ('GERENTE',4700.50,'ADM1','ADM@gmail.com','2025-05-03','12345678910',25,'1234','Nova York',1);
 /*!40000 ALTER TABLE `funcionario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
