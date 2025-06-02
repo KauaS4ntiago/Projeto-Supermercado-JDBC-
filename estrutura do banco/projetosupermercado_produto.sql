@@ -38,7 +38,6 @@ CREATE TABLE `produto` (
 
 LOCK TABLES `produto` WRITE;
 /*!40000 ALTER TABLE `produto` DISABLE KEYS */;
-INSERT INTO `produto` VALUES (1,'Macarrão','Brastemp',19.80,28),(2,'cimento','vitarella',11.00,46),(3,'leite fermentado','diesel',89.00,100),(4,'corda','brastemp',9.99,10);
 /*!40000 ALTER TABLE `produto` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
