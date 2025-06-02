@@ -42,7 +42,6 @@ CREATE TABLE `cliente` (
 
 LOCK TABLES `cliente` WRITE;
 /*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
-INSERT INTO `cliente` VALUES ('Poko Pvp Menezes','poko@gmail.com','2001-09-11','12345678910',0,'1234','parque das nações',1),('Jota gameplays','jota@gmail.com','2007-03-07','64298574621',0,'loki123','João Alfredo',1);
 /*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
